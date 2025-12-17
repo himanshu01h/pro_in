@@ -3,7 +3,7 @@
 import type React from "react"
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
-import { ArrowRight, Search, Bell, Settings } from "lucide-react"
+import { ArrowRight, Gamepad2, Trophy, Users, Zap } from "lucide-react"
 import { Link } from "react-router-dom"
 
 type LaserFlowProps = {
@@ -280,7 +280,7 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
   decay = 1.1,
   falloffStart = 1.2,
   fogFallSpeed = 0.6,
-  color = "#FF79C6",
+  color = "#00FFFF",
 }) => {
   const mountRef = useRef<HTMLDivElement | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
@@ -584,37 +584,48 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
   return <div ref={mountRef} className={`w-full h-full relative ${className || ""}`} style={style} />
 }
 
-export function LaserHero() {
+export function GamingHero() {
+  const stats = [
+    { icon: Users, value: "50K+", label: "Active Gamers" },
+    { icon: Trophy, value: "1000+", label: "Tournaments" },
+    { icon: Zap, value: "24/7", label: "Live Support" },
+  ];
+
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-background w-full">
-      {/* Glassmorphic Navbar */}
+      {/* Navbar */}
       <nav className="relative z-20 w-full">
-        <div className="absolute inset-0 glass-nav rounded-b-xl"></div>
+        <div className="absolute inset-0 glass-nav"></div>
         <div className="relative xl:max-w-7xl max-w-6xl mx-auto py-4 lg:px-0 px-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-foreground font-display">CryptoFlow</span>
-            </div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 group-hover:box-glow-cyan transition-all duration-300">
+                <Gamepad2 className="w-6 h-6 text-primary" />
+              </div>
+              <span className="text-2xl font-bold text-foreground font-display tracking-wider">
+                HACK<span className="text-primary">GAMERS</span>
+              </span>
+            </Link>
 
             <div className="hidden md:flex items-center gap-8">
-              <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-              <Link to="/robot" className="text-muted-foreground hover:text-foreground transition-colors">Robot</Link>
-              <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
-              <Link to="/services" className="text-muted-foreground hover:text-foreground transition-colors">Services</Link>
-              <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
+              <Link to="/" className="text-primary text-glow-cyan transition-colors font-medium text-lg">Home</Link>
+              <Link to="/robot" className="text-muted-foreground hover:text-foreground transition-colors font-medium text-lg">AI Bot</Link>
+              <Link to="/news" className="text-muted-foreground hover:text-foreground transition-colors font-medium text-lg">News</Link>
+              <Link to="/community" className="text-muted-foreground hover:text-foreground transition-colors font-medium text-lg">Community</Link>
             </div>
 
-            <Link to="/contact" className="btn-primary flex items-center gap-2">
-              Start Now
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="hidden md:flex items-center gap-4">
+              <Link to="/auth" className="btn-ghost">Login</Link>
+              <Link to="/auth" className="btn-primary">Sign Up</Link>
+            </div>
           </div>
         </div>
       </nav>
 
+      {/* Laser Background */}
       <div className="absolute inset-0 z-0">
         <LaserFlow
-          color="#FF4444"
+          color="#00FFFF"
           horizontalBeamOffset={0.3}
           verticalBeamOffset={0.0}
           flowSpeed={0.35}
@@ -634,134 +645,57 @@ export function LaserHero() {
         />
       </div>
       <div className="absolute top-4 left-2 h-40 w-40 rounded-full bg-primary/80 blur-[200px]"></div>
+      <div className="absolute bottom-20 right-10 h-60 w-60 rounded-full bg-secondary/60 blur-[200px]"></div>
 
+      {/* Hero Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center pt-20 pb-16">
         <div className="xl:max-w-7xl max-w-6xl w-full mx-auto lg:px-0 px-6">
-          <div className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-secondary/50 pr-3 backdrop-blur-sm border border-border/30 mb-8">
-            <span className="px-2 py-0.5 bg-primary text-primary-foreground text-xs font-bold rounded-full">New</span>
-            <span className="text-sm text-muted-foreground tracking-tight">The Future of Crypto Trading is Here</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/50 pr-4 backdrop-blur-sm border border-border/30 mb-8 animate-fade-in">
+            <span className="px-2 py-0.5 bg-primary text-primary-foreground text-xs font-bold rounded-full font-display">NEW</span>
+            <span className="text-sm text-muted-foreground tracking-wide">Season 5 Tournaments Now Live!</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-balance mb-6 text-foreground leading-tight font-display">
-            Own Your Crypto Journey
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-foreground leading-tight font-display tracking-wider animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            WELCOME TO
             <br />
-            <span className="text-muted-foreground">with One Dashboard</span>
+            <span className="gradient-text">HACK GAMERS</span>
           </h1>
 
-          <p className="text-xl text-muted-foreground text-balance mb-12 max-w-2xl leading-relaxed">
-            Track real-time prices, manage your portfolio, and trade seamlessly — all in one fast, secure, and intuitive
-            platform
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            Your ultimate gaming hub. Connect with gamers worldwide, discover the latest news, and dominate the competition.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <Link to="/contact" className="btn-primary text-lg flex items-center justify-center gap-2">
-              Start Now
+          <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <Link to="/auth" className="btn-primary text-lg flex items-center justify-center gap-2">
+              Join Now
               <ArrowRight className="w-5 h-5" />
             </Link>
-
-            <Link to="/about" className="btn-secondary text-lg">
-              Learn More
+            <Link to="/community" className="btn-ghost text-lg">
+              Explore Community
             </Link>
           </div>
-        </div>
-      </div>
 
-      <div className="relative z-10 lg:px-0 px-6 pb-8">
-        <div className="xl:max-w-7xl max-w-6xl mx-auto w-full">
-          <div className="glass-card overflow-hidden">
-            <div className="flex items-center justify-between p-6 border-b border-border/50">
-              <div className="flex items-center gap-8">
-                <span className="text-xl font-bold text-foreground font-display">Crypto</span>
-                <div className="flex items-center gap-6">
-                  <button className="text-foreground font-medium">Trade</button>
-                  <button className="text-muted-foreground hover:text-foreground">Portfolio</button>
-                  <button className="text-muted-foreground hover:text-foreground">Balance</button>
-                  <button className="text-muted-foreground hover:text-foreground hidden md:block">History</button>
+          {/* Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {stats.map((stat, i) => (
+              <div key={i} className="glass-card p-6 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <stat.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-foreground font-display">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <Search className="w-5 h-5 text-muted-foreground" />
-                <Bell className="w-5 h-5 text-muted-foreground" />
-                <Settings className="w-5 h-5 text-muted-foreground" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
-              <div className="lg:col-span-1 space-y-4">
-                <div className="bg-card rounded-lg p-4 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-sm">₿</span>
-                    </div>
-                    <div>
-                      <div className="text-foreground font-medium">BTC/USDT</div>
-                      <div className="text-xs text-muted-foreground">POW Vol ⚡</div>
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-foreground mb-1 font-display">70,883.00</div>
-                  <div className="text-green-400 text-sm">+3,999.21 +5.98%</div>
-                </div>
-
-                <div className="space-y-2">
-                  {[
-                    { symbol: "BTC", name: "Bitcoin", price: "$71,130.00", change: "+6.60%", positive: true },
-                    { symbol: "ETH", name: "Ethereum", price: "$3,667.50", change: "+18.66%", positive: true },
-                    { symbol: "SOL", name: "Solana", price: "$185.40", change: "+9.52%", positive: true },
-                  ].map((crypto, i) => (
-                    <div key={i} className="flex items-center justify-between py-2 px-3 hover:bg-secondary/30 rounded">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-2 h-2 rounded-full ${crypto.positive ? "bg-green-400" : "bg-primary"}`}></div>
-                        <div>
-                          <div className="text-foreground text-sm font-medium">{crypto.symbol}</div>
-                          <div className="text-muted-foreground text-xs">{crypto.name}</div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-foreground text-sm">{crypto.price}</div>
-                        <div className={`text-xs ${crypto.positive ? "text-green-400" : "text-primary"}`}>
-                          {crypto.change}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="lg:col-span-2">
-                <div className="bg-card rounded-lg p-4 h-64">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-foreground font-medium">BTC/USD</span>
-                    <div className="flex gap-2 text-xs">
-                      <button className="text-muted-foreground hover:text-foreground">1H</button>
-                      <button className="text-foreground bg-secondary px-2 py-1 rounded">1D</button>
-                      <button className="text-muted-foreground hover:text-foreground">1W</button>
-                    </div>
-                  </div>
-                  <div className="relative h-40 bg-background/50 rounded flex items-end justify-center">
-                    <div className="flex items-end gap-1 h-full w-full px-4 pb-4">
-                      {Array.from({ length: 40 }, (_, i) => {
-                        const height = Math.random() * 80 + 20
-                        const isGreen = Math.random() > 0.4
-                        return (
-                          <div
-                            key={i}
-                            className={`flex-1 ${isGreen ? "bg-green-500" : "bg-primary"} opacity-80 rounded-t`}
-                            style={{ height: `${height}%` }}
-                          />
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background/60 via-transparent to-background/40 pointer-events-none" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background/80 via-transparent to-background/60 pointer-events-none" />
     </section>
   )
 }
 
-export default LaserHero
+export default GamingHero
