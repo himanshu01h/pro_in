@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { Gamepad2, Menu, X, User } from "lucide-react";
 import { useState } from "react";
 
 export function Navbar() {
@@ -8,10 +8,9 @@ export function Navbar() {
 
   const links = [
     { to: "/", label: "Home" },
-    { to: "/robot", label: "Robot" },
-    { to: "/about", label: "About" },
-    { to: "/services", label: "Services" },
-    { to: "/contact", label: "Contact" },
+    { to: "/robot", label: "AI Bot" },
+    { to: "/news", label: "News" },
+    { to: "/community", label: "Community" },
   ];
 
   return (
@@ -19,8 +18,13 @@ export function Navbar() {
       <div className="absolute inset-0 glass-nav"></div>
       <div className="relative xl:max-w-7xl max-w-6xl mx-auto py-4 px-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-foreground font-display">CryptoFlow</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 group-hover:box-glow-cyan transition-all duration-300">
+              <Gamepad2 className="w-6 h-6 text-primary" />
+            </div>
+            <span className="text-2xl font-bold text-foreground font-display tracking-wider">
+              HACK<span className="text-primary">GAMERS</span>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -29,9 +33,9 @@ export function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`transition-colors ${
+                className={`transition-all duration-300 font-medium text-lg tracking-wide ${
                   location.pathname === link.to
-                    ? "text-foreground font-medium"
+                    ? "text-primary text-glow-cyan"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -40,10 +44,15 @@ export function Navbar() {
             ))}
           </div>
 
-          <Link to="/contact" className="hidden md:flex btn-primary items-center gap-2">
-            Start Now
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/auth" className="btn-ghost flex items-center gap-2">
+              <User className="w-4 h-4" />
+              Login
+            </Link>
+            <Link to="/auth" className="btn-primary">
+              Sign Up
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -63,22 +72,31 @@ export function Navbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setIsOpen(false)}
-                  className={`py-2 transition-colors ${
+                  className={`py-2 transition-colors text-lg ${
                     location.pathname === link.to
-                      ? "text-foreground font-medium"
+                      ? "text-primary font-medium"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/contact"
-                onClick={() => setIsOpen(false)}
-                className="btn-primary text-center mt-2"
-              >
-                Start Now
-              </Link>
+              <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border">
+                <Link
+                  to="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="btn-ghost text-center"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="btn-primary text-center"
+                >
+                  Sign Up
+                </Link>
+              </div>
             </div>
           </div>
         )}
