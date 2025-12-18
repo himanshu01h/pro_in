@@ -1,6 +1,6 @@
 ## Project info
 
-**URL**: 
+**URL**: https://proinit.vercel.app/
 
 ## What technologies are used for this project?
 
